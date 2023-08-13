@@ -12,10 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        TAG=$(date +%s)
+        docker buildx build . --file Dockerfile --tag my-image-name:$TAG
+        echo "::set-output name=tag::$TAG"
+      id: build
     - name: Log in to Docker Hub
       run: echo "jfit8X@SC)P+hk$" | docker login -u aurits --password-stdin
     - name: Push Docker image to Docker Hub
-      run: docker push my-image-name:$(date +%s)
+      run: docker push my-image-name:${{ steps.build.outputs.tag }}
