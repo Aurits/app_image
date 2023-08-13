@@ -16,6 +16,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Log in to Docker Hub
-      run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      run: echo "jfit8X@SC)P+hk$" | docker login -u aurits --password-stdin
     - name: Push Docker image to Docker Hub
       run: docker push my-image-name:$(date +%s)
