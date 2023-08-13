@@ -10,8 +10,6 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-COPY Recess_Project_Template/src/our_app/requirements.txt /app
-
 # Install any needed packages specified in requirements.txt
 RUN pip3 install -r requirements.txt
 
