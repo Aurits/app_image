@@ -11,6 +11,13 @@ WORKDIR /app
 # Copy the rest of the application code
 COPY . /app
 
+# Install Nginx
+RUN apt-get update && \
+    apt-get install -y nginx
+
+# Copy Nginx configuration
+COPY nginx/default.conf /etc/nginx/sites-available/default
+
 # Expose port 80 to the outside world
 EXPOSE 80
 
